@@ -5,7 +5,7 @@ Test QHull library with PCL, perform RANSAC GPF, Convex Hull and Pyramidal Extra
 
 PCL with VTK and QHull installed
 ```
-C:\vcpkg>vcpkg install vtk[qtopengl] --triplet x64-windows
+C:\vcpkg>vcpkg install vtk[opengl] --triplet x64-windows
 C:\vcpkg>vcpkg install pcl[opengl] pcl[qt] pcl[pcap] pcl[tools] pcl --triplet x64-windows
 ```
 
