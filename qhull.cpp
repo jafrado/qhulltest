@@ -25,10 +25,16 @@ main(int argc, char** argv)
 	pcl::PointCloud<pcl::PointXYZ>::Ptr convexHull(new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PointCloud<pcl::PointXYZ>::Ptr objects(new pcl::PointCloud<pcl::PointXYZ>);
 
+	if (argc < 1) {
+		std::cout << "usage:" << argv[0] << " <pclfile>" << std::endl;
+		return -1;
+	}
+
 	// Read a PCD file from disk.
 	if (pcl::io::loadPCDFile<pcl::PointXYZ>(argv[1], *cloud) != 0)
 	{
-		return -1;
+		std::cout << "error: could not open pcl file[" << argv[1] << std::endl;
+		return -2;
 	}
 
 	// Get the plane model, if present.
@@ -55,6 +61,8 @@ main(int argc, char** argv)
 		std::cout << "Planar segmentation:" << planeIndices->indices.size() << " points" << std::endl;
 
 
+#define TESTING_ALL 1		//comment out this line to just test PCL/VTK
+#ifdef TESTING_ALL
 		// Retrieve the convex hull.
 		pcl::ConvexHull<pcl::PointXYZ> hull;
 		hull.setInputCloud(plane);
@@ -92,5 +100,6 @@ main(int argc, char** argv)
 		else {
 			std::cout << "The chosen hull is not planar." << std::endl;
 		}
+#endif
 	}
 }
